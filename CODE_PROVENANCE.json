@@ -1,0 +1,82 @@
+[
+  {
+    "original": "original_code/02_analysis.py",
+    "portable": "03_code/02_analysis.py",
+    "original_sha256": "b426a1116eb6e898e7594afaaefb93fb214425d1fa8dc06b23f2029cb0898bb5",
+    "portable_sha256": "1b43bf179567455382541af28d8af7cea636946ee9c7f60fa30008db5317fafa",
+    "replacements": [
+      {
+        "old": "Run with the existing .venv-medical Python.",
+        "new": "See README.md for the recorded environment and explicit local input configuration."
+      },
+      {
+        "old": "ROOT=Path(__file__).resolve().parents[1]; OUT=ROOT/'04_results'; OUT.mkdir(exist_ok=True)",
+        "new": "from repro_paths import nacc_file, adni_root, output_dir\nROOT=Path(__file__).resolve().parents[1]; OUT=output_dir()"
+      },
+      {
+        "old": "N=Path(r'D:\\DataAnalysis\\NACC\\investigator_nacc74.csv'); A=Path(r'D:\\DataAnalysis\\ADNI')",
+        "new": "N=nacc_file(); A=adni_root()"
+      },
+      {
+        "old": "from repro_paths import nacc_file, adni_root, output_dir",
+        "new": "from repro_paths import nacc_file, adni_root, output_dir, protocol_sha256"
+      },
+      {
+        "old": "hashlib.sha256((ROOT/'02_protocol/SAP_v1_2026-09-17.md').read_bytes()).hexdigest()",
+        "new": "protocol_sha256()"
+      }
+    ]
+  },
+  {
+    "original": "original_code/04_verify_numeric.py",
+    "portable": "03_code/04_verify_numeric.py",
+    "original_sha256": "8fce7e9e7421f5454d2e6cac8bec46e8fa7e7dbdcd6ad6b2829525057f95368a",
+    "portable_sha256": "51abc7f28376af1b9b52a30f69dcfcc6f48e489d44876af0eb39fb027795c4b0",
+    "replacements": [
+      {
+        "old": "R=Path(__file__).resolve().parents[1];O=R/'04_results';out=[]",
+        "new": "from repro_paths import nacc_file, results_dir, output_dir\nR=Path(__file__).resolve().parents[1];O=results_dir();out=[]"
+      },
+      {
+        "old": "pd.read_csv(r'D:\\DataAnalysis\\NACC\\investigator_nacc74.csv',",
+        "new": "pd.read_csv(nacc_file(),"
+      },
+      {
+        "old": "a=json.loads((O/'analysis_results_v1.json')",
+        "new": "a=json.loads((R/'04_results/analysis_results_v1.json')"
+      },
+      {
+        "old": "(O/'independent_numeric_QA.json').write_text",
+        "new": "(output_dir()/'independent_numeric_QA.json').write_text"
+      },
+      {
+        "old": "from repro_paths import nacc_file, results_dir, output_dir",
+        "new": "from repro_paths import nacc_file, results_dir, output_dir, baseline_results_file"
+      },
+      {
+        "old": "a=json.loads((R/'04_results/analysis_results_v1.json').read_text(encoding='utf8'))\nck('implementation_fix_did_not_change_primary',a['disposition']==res['disposition'])\nck('implementation_fix_did_not_change_corroboration',a['corroboration']==res['corroboration'])",
+        "new": "baseline=baseline_results_file()\nif baseline is not None:\n a=json.loads(baseline.read_text(encoding='utf8'))\n ck('implementation_fix_did_not_change_primary',a['disposition']==res['disposition'])\n ck('implementation_fix_did_not_change_corroboration',a['corroboration']==res['corroboration'])"
+      },
+      {
+        "old": "report={'checks':out,",
+        "new": "report={'baseline_comparison_included':baseline is not None,'checks':out,"
+      }
+    ]
+  },
+  {
+    "original": "original_code/06_figures.py",
+    "portable": "03_code/06_figures.py",
+    "original_sha256": "08e85ee2f4505d5541f0bbf4730c3b4b3c7f84fc9138971bc20f9e055a1062c7",
+    "portable_sha256": "8d28bb41064117573f4ef3c6583514e7db402c8735c83b3fa8bc1a8be1303dc4",
+    "replacements": [
+      {
+        "old": "R=Path(__file__).resolve().parents[1];O=R/'05_figures';O.mkdir(exist_ok=True)",
+        "new": "from repro_paths import results_dir, figures_dir\nR=Path(__file__).resolve().parents[1];O=figures_dir()"
+      },
+      {
+        "old": "(R/'04_results/analysis_results_v2.json')",
+        "new": "(results_dir()/'analysis_results_v2.json')"
+      }
+    ]
+  }
+]

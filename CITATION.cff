@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "Please cite this research software and its version when using the code."
+title: "Durability of Meaningful CDR-SB Worsening in Early Cognitive Impairment: Analysis Code"
+type: software
+version: 1.0.0
+date-released: 2026-10-06
+repository-code: "https://github.com/sducp-88/cdr-sb-worsening-durability"
+authors:
+  - family-names: Cheng
+    given-names: Peng
+  - family-names: Jin
+    given-names: Suqin
+  - family-names: Li
+    given-names: Fan
+  - family-names: Luan
+    given-names: Lixin
+  - family-names: Cui
+    given-names: Yunfei
+  - family-names: Ma
+    given-names: Wenwen
